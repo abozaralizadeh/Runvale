@@ -91,6 +91,10 @@ cd backend && npm run typecheck
 
 See [docs/architecture.md](docs/architecture.md).
 
+## Fair use
+
+Only scan sites you own or have permission to test. The scan is passive and rate-limited, and the deeper checks need proof that the site is yours. To report misuse, open a GitHub issue.
+
 ## Contributing
 
 Issues and pull requests are welcome. Read [CONTRIBUTING.md](CONTRIBUTING.md) first, because contributions come with a licensing condition.
