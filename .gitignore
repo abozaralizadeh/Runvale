@@ -1,0 +1,38 @@
+# dependencies and build output
+node_modules/
+.venv/
+venv/
+dist/
+build/
+target/
+.next/
+DerivedData/
+
+# runtime data, logs and databases
+/data/
+/logs/
+logs/
+*.log
+*.db
+*.sqlite
+*.sqlite3
+*.db-wal
+*.db-shm
+pgdata/
+volumes/
+
+# secrets and local config (keep the examples)
+.env
+.env.*
+!.env.example
+
+# models and large binaries
+models/
+*.gguf
+*.safetensors
+*.bin
+*.onnx
+
+# tools and OS
+.claude/
+.DS_Store

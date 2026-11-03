@@ -1,0 +1,43 @@
+{
+  "name": "airchitect-backend",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.13"
+  },
+  "bin": {
+    "airchitect": "dist/cli.js",
+    "airchitect-mcp": "dist/mcp.js"
+  },
+  "scripts": {
+    "dev": "node --watch --import tsx src/server.ts",
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/server.js",
+    "test": "node --import tsx --test \"test/**/*.test.ts\"",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "cli": "node --import tsx src/cli.ts"
+  },
+  "dependencies": {
+    "@fastify/helmet": "^13.2.0",
+    "@fastify/rate-limit": "^11.2.1",
+    "@fastify/static": "^10.1.8",
+    "@modelcontextprotocol/sdk": "^1.32.2",
+    "fastify": "^5.12.7",
+    "fflate": "^0.8.3",
+    "ipaddr.js": "^2.5.0",
+    "pino": "^10.4.0",
+    "rotating-file-stream": "^3.2.10",
+    "undici": "^8.12.3",
+    "yaml": "^2.9.1",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.6",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2"
+  },
+  "overrides": {
+    "glob": "^14.0.3"
+  }
+}

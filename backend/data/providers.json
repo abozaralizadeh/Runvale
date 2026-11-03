@@ -1,0 +1,97 @@
+{
+  "asOf": "2026-10-30",
+  "source": "https://getdeploying.com/reference/compute-prices",
+  "usdToEur": 0.89,
+  "note": "Reference prices, not live. Reliability and ops scores (1 to 5) are our own judgement. Check the provider's page before you buy.",
+  "providers": {
+    "hetzner": {
+      "name": "Hetzner", "hq": "Germany", "euHq": true, "euRegion": "Falkenstein, Germany",
+      "egress": { "includedTb": 20, "overPerTb": 1, "currency": "EUR" },
+      "reliability": 4, "ops": 5, "stability": 2, "deploy": "api",
+      "url": "https://www.hetzner.com/cloud",
+      "warning": "Raised prices twice in 2026, and its cheapest plans often show as unavailable. We check real stock before deploying."
+    },
+    "ovhcloud": {
+      "name": "OVHcloud", "hq": "France", "euHq": true, "euRegion": "Gravelines, France",
+      "egress": { "includedTb": null, "overPerTb": 0, "currency": "EUR" },
+      "reliability": 3, "ops": 3, "stability": 4, "deploy": "paste",
+      "url": "https://www.ovhcloud.com/en/vps/",
+      "warning": "The listed price can need a 12-month commitment."
+    },
+    "scaleway": {
+      "name": "Scaleway", "hq": "France", "euHq": true, "euRegion": "Paris, France",
+      "egress": { "includedTb": null, "overPerTb": 0, "currency": "EUR" },
+      "reliability": 4, "ops": 4, "stability": 4, "deploy": "paste",
+      "url": "https://www.scaleway.com/en/pricing/virtual-instances/"
+    },
+    "contabo": {
+      "name": "Contabo", "hq": "Germany", "euHq": true, "euRegion": "Nuremberg, Germany",
+      "egress": { "includedTb": null, "overPerTb": 0, "currency": "EUR" },
+      "reliability": 2, "ops": 2, "stability": 3, "deploy": "paste",
+      "url": "https://contabo.com/en/vps/",
+      "warning": "Very cheap, but busier shared hardware. Traffic is unlimited under fair use."
+    },
+    "upcloud": {
+      "name": "UpCloud", "hq": "Finland", "euHq": true, "euRegion": "Helsinki, Finland",
+      "egress": { "includedTb": 1, "overPerTb": 0, "currency": "EUR" },
+      "reliability": 4, "ops": 4, "stability": 4, "deploy": "paste",
+      "url": "https://upcloud.com/pricing/"
+    },
+    "digitalocean": {
+      "name": "DigitalOcean", "hq": "USA", "euHq": false, "euRegion": "Frankfurt, Germany",
+      "egress": { "includedTb": 5, "overPerTb": 10, "currency": "USD" },
+      "reliability": 4, "ops": 5, "stability": 4, "deploy": "paste",
+      "url": "https://www.digitalocean.com/pricing/droplets"
+    },
+    "vultr": {
+      "name": "Vultr", "hq": "USA", "euHq": false, "euRegion": "Frankfurt, Germany",
+      "egress": { "includedTb": 4, "overPerTb": 10, "currency": "USD" },
+      "reliability": 3, "ops": 4, "stability": 4, "deploy": "paste",
+      "url": "https://www.vultr.com/pricing/"
+    },
+    "aws": {
+      "name": "AWS", "hq": "USA", "euHq": false, "euRegion": "Frankfurt, Germany",
+      "egress": { "includedTb": 0.1, "overPerTb": 90, "currency": "USD" },
+      "reliability": 5, "ops": 5, "stability": 5, "deploy": "paste",
+      "url": "https://aws.amazon.com/ec2/pricing/on-demand/"
+    },
+    "azure": {
+      "name": "Azure", "hq": "USA", "euHq": false, "euRegion": "Frankfurt, Germany",
+      "egress": { "includedTb": 0.1, "overPerTb": 87, "currency": "USD" },
+      "reliability": 5, "ops": 4, "stability": 5, "deploy": "paste",
+      "url": "https://azure.microsoft.com/pricing/details/virtual-machines/linux/"
+    },
+    "gcp": {
+      "name": "Google Cloud", "hq": "USA", "euHq": false, "euRegion": "Frankfurt, Germany",
+      "egress": { "includedTb": 0.001, "overPerTb": 120, "currency": "USD" },
+      "reliability": 5, "ops": 4, "stability": 5, "deploy": "paste",
+      "url": "https://cloud.google.com/compute/vm-instance-pricing"
+    }
+  },
+  "plans": [
+    { "provider": "hetzner", "plan": "CX23", "vcpu": 2, "ramGb": 4, "price": 5.49, "currency": "EUR", "apiName": "cx23" },
+    { "provider": "hetzner", "plan": "CX33", "vcpu": 4, "ramGb": 8, "price": 8.99, "currency": "EUR", "apiName": "cx33" },
+    { "provider": "hetzner", "plan": "CX43", "vcpu": 8, "ramGb": 16, "price": 18.42, "currency": "USD", "apiName": "cx43" },
+    { "provider": "ovhcloud", "plan": "VPS-1", "vcpu": 2, "ramGb": 4, "price": 5.35, "currency": "USD" },
+    { "provider": "ovhcloud", "plan": "VPS-2", "vcpu": 4, "ramGb": 8, "price": 10.0, "currency": "USD" },
+    { "provider": "ovhcloud", "plan": "VPS-4", "vcpu": 8, "ramGb": 24, "price": 27.5, "currency": "USD" },
+    { "provider": "scaleway", "plan": "PLAY2-PICO", "vcpu": 1, "ramGb": 2, "price": 11.48, "currency": "USD" },
+    { "provider": "scaleway", "plan": "DEV1-L", "vcpu": 4, "ramGb": 8, "price": 31.27, "currency": "EUR" },
+    { "provider": "scaleway", "plan": "COMPUTE3-X8C-16G", "vcpu": 8, "ramGb": 16, "price": 188.3, "currency": "USD" },
+    { "provider": "contabo", "plan": "Cloud VPS 4", "vcpu": 4, "ramGb": 8, "price": 6.14, "currency": "USD" },
+    { "provider": "contabo", "plan": "Cloud VPS 6", "vcpu": 6, "ramGb": 12, "price": 8.38, "currency": "USD" },
+    { "provider": "contabo", "plan": "Cloud VPS 8", "vcpu": 8, "ramGb": 24, "price": 15.64, "currency": "USD" },
+    { "provider": "upcloud", "plan": "Starter 4/8", "vcpu": 4, "ramGb": 8, "price": 24.0, "currency": "USD" },
+    { "provider": "upcloud", "plan": "Cloud Native 8/16", "vcpu": 8, "ramGb": 16, "price": 92.0, "currency": "USD" },
+    { "provider": "digitalocean", "plan": "Basic 4/8", "vcpu": 4, "ramGb": 8, "price": 48.0, "currency": "USD" },
+    { "provider": "digitalocean", "plan": "CPU-Optimized 8/16", "vcpu": 8, "ramGb": 16, "price": 168.0, "currency": "USD" },
+    { "provider": "vultr", "plan": "Shared 4/8", "vcpu": 4, "ramGb": 8, "price": 40.0, "currency": "USD" },
+    { "provider": "vultr", "plan": "CPU-Optimized 8/16", "vcpu": 8, "ramGb": 16, "price": 160.0, "currency": "USD" },
+    { "provider": "aws", "plan": "c6a.xlarge", "vcpu": 4, "ramGb": 8, "price": 127.46, "currency": "USD" },
+    { "provider": "aws", "plan": "c6a.2xlarge", "vcpu": 8, "ramGb": 16, "price": 220.32, "currency": "USD" },
+    { "provider": "azure", "plan": "B4als v2", "vcpu": 4, "ramGb": 8, "price": 95.76, "currency": "USD" },
+    { "provider": "azure", "plan": "D8als v6", "vcpu": 8, "ramGb": 16, "price": 231.84, "currency": "USD" },
+    { "provider": "gcp", "plan": "E2 custom 4/8", "vcpu": 4, "ramGb": 8, "price": 94.2, "currency": "USD" },
+    { "provider": "gcp", "plan": "n4-highcpu-8", "vcpu": 8, "ramGb": 16, "price": 220.44, "currency": "USD" }
+  ]
+}
