@@ -40,7 +40,7 @@ const MAX_RLS_TABLES = 40;
 // Proving control of the site unlocks the deeper checks. The token doesn't need to be secret:
 // only someone who controls the site can publish it there.
 export function verifyToken(hostname: string): string {
-  return `airchitect-verify-${crypto.createHash('sha256').update(`airchitect:${hostname.toLowerCase()}`).digest('hex').slice(0, 32)}`;
+  return `runvale-verify-${crypto.createHash('sha256').update(`runvale:${hostname.toLowerCase()}`).digest('hex').slice(0, 32)}`;
 }
 
 function gradeFor(score: number, findings: Finding[]): ScanReport['grade'] {
@@ -203,7 +203,7 @@ function checkHeaders(page: FetchResult, add: (f: Finding) => void, pass: (s: st
 async function isVerifiedOwner(origin: string, html: string, token: string, allowPrivate: boolean) {
   if (html.includes(token)) return true;
   try {
-    const file = await safeFetch(`${origin}/.well-known/airchitect-verify.txt`, { maxBytes: 2_000, allowPrivate, redirects: 0 });
+    const file = await safeFetch(`${origin}/.well-known/runvale-verify.txt`, { maxBytes: 2_000, allowPrivate, redirects: 0 });
     return file.status === 200 && file.body.toString().includes(token);
   } catch {
     return false;

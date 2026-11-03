@@ -7,10 +7,10 @@ import { rescue } from './rescue.js';
 import { scanUrl, type Finding } from './scanner.js';
 
 const USAGE = `Usage:
-  airchitect scan <url>                     Security check of a live site
-  airchitect quote [--budget 20] [--users 2000] [--eu] [--db]
+  runvale scan <url>                     Security check of a live site
+  runvale quote [--budget 20] [--users 2000] [--eu] [--db]
                                             Find the best-fit cloud
-  airchitect rescue <folder|github-url>     Check a project and write its deploy kit
+  runvale rescue <folder|github-url>     Check a project and write its deploy kit
       [--out dir] [--budget 20] [--eu] [--force]
 
 Add --json to any command for machine-readable output.`;
@@ -52,7 +52,7 @@ async function main() {
     if (values.json) return console.log(JSON.stringify(report, null, 2));
     console.log(`Grade ${report.grade} (${report.score}/100) for ${report.finalUrl}`);
     printFindings(report.findings);
-    if (!report.owner.verified) console.log(`\nFor deeper checks, publish this at /.well-known/airchitect-verify.txt:\n  ${report.owner.token}`);
+    if (!report.owner.verified) console.log(`\nFor deeper checks, publish this at /.well-known/runvale-verify.txt:\n  ${report.owner.token}`);
     return;
   }
 

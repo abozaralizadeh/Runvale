@@ -125,7 +125,7 @@ function Report({ report, rerun, busy }: { report: ScanReport; rerun: () => void
           <p className="prose">We also ran: {report.owner.checksRun.join(', ')}.</p>
         ) : (
           <div className="prose">
-            <p>We also look for public <code>.env</code> and <code>.git</code> files and test whether anyone can read your Supabase tables. We only do that on sites you control. To prove it, publish this text at <code>/.well-known/airchitect-verify.txt</code>, or anywhere in your homepage's HTML:</p>
+            <p>We also look for public <code>.env</code> and <code>.git</code> files and test whether anyone can read your Supabase tables. We only do that on sites you control. To prove it, publish this text at <code>/.well-known/runvale-verify.txt</code>, or anywhere in your homepage's HTML:</p>
             <div className="token"><code>{report.owner.token}</code><CopyButton text={report.owner.token} label="Copy" /></div>
             <button type="button" className="ghost" disabled={busy} onClick={rerun}>{busy ? 'Checking…' : "I've added it, check again"}</button>
           </div>

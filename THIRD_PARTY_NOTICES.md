@@ -1,6 +1,6 @@
 # Third-party notices
 
-Airchitect's own code is under the PolyForm Noncommercial License 1.0.0 (see [LICENSE](LICENSE)). The pieces below belong to others and keep their own licenses.
+Runvale's own code is under the PolyForm Noncommercial License 1.0.0 (see [LICENSE](LICENSE)). The pieces below belong to others and keep their own licenses.
 
 ## Bundled into the built app
 
@@ -25,7 +25,7 @@ None of these are copied into this repo. npm downloads them, and their license f
 
 ## Data
 
-`backend/data/providers.json` lists plans and prices that cloud providers publish. It was compiled with help from getdeploying.com. Prices are facts and change often, so check them with the provider before you rely on them. Hetzner prices and stock are read live from Hetzner's own API.
+`backend/data/providers.json` lists plans and prices that cloud providers publish. Since 3 Nov 2026 every price comes from the provider's own pricing page or public pricing API (OVHcloud, Vultr and Azure catalog APIs, AWS's public price files, and the official pages of the others). Each plan carries the URL it was read from. No third-party price aggregator is used. Prices are facts and change often, so check them with the provider before you rely on them. Hetzner prices and stock are read live from Hetzner's own API.
 
 ## Container images used by generated deploy kits
 

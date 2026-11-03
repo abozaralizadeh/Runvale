@@ -22,6 +22,7 @@ interface Plan {
   price: number;
   currency: string;
   apiName?: string;
+  source: string;
 }
 
 interface Catalog {
@@ -189,6 +190,7 @@ export function cloudIndex() {
           hq: provider.hq,
           euHq: provider.euHq,
           url: provider.url,
+          source: plan.source,
         };
       })
       .sort((a, b) => a.monthlyEur - b.monthlyEur),

@@ -1,5 +1,5 @@
 {
-  "name": "airchitect-backend",
+  "name": "runvale-backend",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -7,8 +7,8 @@
     "node": ">=22.13"
   },
   "bin": {
-    "airchitect": "dist/cli.js",
-    "airchitect-mcp": "dist/mcp.js"
+    "runvale": "dist/cli.js",
+    "runvale-mcp": "dist/mcp.js"
   },
   "scripts": {
     "dev": "node --watch --import tsx src/server.ts",

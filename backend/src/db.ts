@@ -5,7 +5,7 @@ import { config } from './config.js';
 
 fs.mkdirSync(config.dataDir, { recursive: true });
 
-export const db = new DatabaseSync(path.join(config.dataDir, 'airchitect.db'));
+export const db = new DatabaseSync(path.join(config.dataDir, 'runvale.db'));
 
 db.exec(`
   PRAGMA journal_mode = WAL;

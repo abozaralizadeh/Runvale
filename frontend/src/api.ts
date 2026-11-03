@@ -1,5 +1,5 @@
-// One place to change the name, because "Airchitect" is only a working name.
-export const BRAND = 'Airchitect';
+// The product name, in one place.
+export const BRAND = 'Runvale';
 
 export type Severity = 'critical' | 'high' | 'medium' | 'low' | 'info';
 
@@ -62,6 +62,7 @@ export interface IndexRow {
   hq: string;
   euHq: boolean;
   url: string;
+  source: string;
 }
 
 export interface CloudIndex {

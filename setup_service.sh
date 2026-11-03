@@ -1,27 +1,40 @@
 #!/usr/bin/env bash
-# Installs Airchitect on an Ubuntu or Debian VM. Run it the first time to set everything up,
+# Installs Runvale on an Ubuntu or Debian VM. Run it the first time to set everything up,
 # and again after any update to rebuild and restart:
 #
 #   sudo ./setup_service.sh
 #   sudo DOMAIN=app.example.com ./setup_service.sh
 #
-# Logs: journalctl -u airchitect.service -f
-# Log files to copy off the VM: /var/log/airchitect/ (3 files, 5 MB each)
+# Logs: journalctl -u runvale.service -f
+# Log files to copy off the VM: /var/log/runvale/ (3 files, 5 MB each)
 set -euo pipefail
 
-SERVICE=airchitect
-APP_USER=airchitect
+SERVICE=runvale
+APP_USER=runvale
 SOURCE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-APP_DIR=/opt/airchitect
-DATA_DIR=/var/lib/airchitect
-LOG_DIR=/var/log/airchitect
-ENV_FILE=/etc/airchitect.env
+APP_DIR=/opt/runvale
+DATA_DIR=/var/lib/runvale
+LOG_DIR=/var/log/runvale
+ENV_FILE=/etc/runvale.env
 PORT=8790
 NODE_MAJOR=24
 
 if [ "$(id -u)" -ne 0 ]; then
   echo "Run this with sudo." >&2
   exit 1
+fi
+
+# Before 3 Nov 2026 the app was called Airchitect. Move an old install over once, keeping its data and settings.
+if [ -f /etc/systemd/system/airchitect.service ]; then
+  echo "==> Moving the old airchitect install to runvale"
+  systemctl disable --now airchitect.service || true
+  rm -f /etc/systemd/system/airchitect.service
+  systemctl daemon-reload
+  if [ -d /var/lib/airchitect ] && [ ! -d "$DATA_DIR" ]; then
+    mv /var/lib/airchitect "$DATA_DIR"
+    for f in "$DATA_DIR"/airchitect.db*; do [ -e "$f" ] && mv "$f" "$DATA_DIR/runvale${f#"$DATA_DIR"/airchitect}"; done
+  fi
+  [ -f /etc/airchitect.env ] && [ ! -f "$ENV_FILE" ] && mv /etc/airchitect.env "$ENV_FILE"
 fi
 
 echo "==> Installing system packages"
@@ -75,7 +88,7 @@ fi
 
 cat > "/etc/systemd/system/$SERVICE.service" <<UNIT
 [Unit]
-Description=Airchitect
+Description=Runvale
 After=network-online.target
 Wants=network-online.target
 

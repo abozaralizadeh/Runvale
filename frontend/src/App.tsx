@@ -43,7 +43,7 @@ export function App() {
     <>
       <header className="top">
         <a className="brand" href="#/scan">
-          <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M7 25 16 6l9 19M10.8 18h10.4" /></svg>
+          <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 7 16 22 27 7" /><circle cx="16" cy="14" r="2.6" /></svg>
           {BRAND}
         </a>
         <nav aria-label="Main">

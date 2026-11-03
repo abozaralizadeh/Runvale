@@ -7,7 +7,7 @@ import { config } from './config.js';
 
 export class BlockedTargetError extends Error {}
 
-export const USER_AGENT = 'AirchitectScanner/0.1 (passive security check)';
+export const USER_AGENT = 'RunvaleScanner/0.1 (passive security check)';
 
 export function isPublicAddress(ip: string): boolean {
   if (!ipaddr.isValid(ip)) return false;

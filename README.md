@@ -1,12 +1,12 @@
-# Airchitect
+# Runvale
 
-![Airchitect demo: scan a site, compare clouds, rescue a repo, watch the app](site/demo/tour.gif)
+![Runvale demo: scan a site, compare clouds, rescue a repo, watch the app](site/demo/tour.gif)
 
 Get a web app you built (often with an AI tool) safely onto a server you can afford.
 
-Project site: https://abozaralizadeh.github.io/Airchitect/ · [Full demo video (MP4)](site/demo/tour.mp4)
+Project site: https://abozaralizadeh.github.io/Runvale/ · [Full demo video (MP4)](site/demo/tour.mp4)
 
-Airchitect does four things:
+Runvale does four things:
 
 - **Scan** a live app for leaked keys, missing security headers and weak settings, and explain the fixes in plain words.
 - **Quote** where to host it. It compares European and US cloud providers by price, reliability and tooling and gives you three options.
@@ -15,14 +15,14 @@ Airchitect does four things:
 
 It also comes as a CLI and an MCP server, so coding agents can use it directly.
 
-> Status: early beta. "Airchitect" is a working name and will change. See [CHECKLIST.md](CHECKLIST.md) for what works, what's faked and what's missing.
+> Status: early beta. See [CHECKLIST.md](CHECKLIST.md) for what works, what's faked and what's missing.
 
 ## Quick install
 
 You need Node.js 24 or newer.
 
 ```bash
-git clone <this repo> airchitect && cd airchitect
+git clone <this repo> runvale && cd runvale
 ```
 
 ```bash
@@ -45,10 +45,10 @@ On a fresh Ubuntu VM:
 sudo ./setup_service.sh
 ```
 
-It installs Node and Caddy, builds the app and starts the `airchitect` service. To use your own domain, run `sudo DOMAIN=app.example.com ./setup_service.sh` instead. Without a domain, the script uses `<ip>.sslip.io`. Rerun it any time to update. Logs:
+It installs Node and Caddy, builds the app and starts the `runvale` service. To use your own domain, run `sudo DOMAIN=app.example.com ./setup_service.sh` instead. Without a domain, the script uses `<ip>.sslip.io`. Rerun it any time to update. Logs:
 
 ```bash
-journalctl -u airchitect.service -f
+journalctl -u runvale.service -f
 ```
 
 ### Use it from the command line
@@ -70,7 +70,7 @@ node dist/cli.js rescue ./my-app --out ./my-app
 After `npm run build`, add the MCP server to any MCP client:
 
 ```json
-{ "mcpServers": { "airchitect": { "command": "node", "args": ["/path/to/airchitect/backend/dist/mcp.js"] } } }
+{ "mcpServers": { "runvale": { "command": "node", "args": ["/path/to/runvale/backend/dist/mcp.js"] } } }
 ```
 
 The agent gets three tools: `scan_url`, `quote_cloud` and `rescue_project`.

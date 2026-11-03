@@ -1,4 +1,4 @@
-/* Airchitect site. Identity: an architect's drawing on blueprint or drafting paper, marked up in safety orange. */
+/* Runvale site. Identity: an architect's drawing on blueprint or drafting paper, marked up in safety orange. */
 
 /* Fonts are self-hosted (latin subset, SIL Open Font License) so the page makes no third-party requests. */
 @font-face { font-family: 'Bricolage Grotesque'; font-style: normal; font-weight: 200 800; font-stretch: 75% 100%; font-display: swap; src: url(fonts/bricolage.woff2) format('woff2'); }
@@ -105,6 +105,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 700; letter-spacing: -0.0
 .brand { display: flex; align-items: center; gap: 10px; font: 700 19px/1 var(--display); text-decoration: none; letter-spacing: -0.01em; }
 .brand-mark { width: 26px; height: 26px; fill: none; stroke: var(--ink); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
 .brand-mark .brand-axis { stroke: var(--accent); stroke-dasharray: 2 3; stroke-width: 1.6; }
+.brand-mark .brand-dot { fill: var(--accent); stroke: none; }
 .nav nav { display: flex; gap: 24px; margin-left: auto; }
 .nav nav a { font-size: 15px; color: var(--muted); text-decoration: none; }
 .nav nav a:hover { color: var(--ink); }

@@ -14,10 +14,11 @@ test('options are real alternatives inside the budget', () => {
 });
 
 test('Premium is a real step up, and says so when it costs more than the budget', () => {
-  const q = quote({ ...base, euOnly: true, needsDatabase: true });
+  const q = quote({ ...base, euOnly: true, needsDatabase: true, monthlyBudget: 8 });
   const [, balanced, premium] = q.options;
   assert.ok(premium!.monthly.total > balanced!.monthly.total);
-  assert.equal(premium!.overBudgetBy, Math.round((premium!.monthly.total - 20) * 100) / 100);
+  assert.ok(premium!.monthly.total > 8);
+  assert.equal(premium!.overBudgetBy, Math.round((premium!.monthly.total - 8) * 100) / 100);
 });
 
 test('EU only drops American companies', () => {

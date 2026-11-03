@@ -21,7 +21,7 @@ Where the project stands. Good places to help are under "Faked or limited" and "
 ## Faked or limited
 
 - [ ] Hetzner deploy is only tested against a fake Hetzner API.
-- [ ] Prices for everyone except Hetzner come from a static catalog (`backend/data/providers.json`), not live APIs.
+- [ ] Prices for everyone except Hetzner come from a static catalog (`backend/data/providers.json`), not live APIs. Each price was read from the provider's own page or API on 3 Nov 2026 and links to its source. Next step: refresh OVHcloud, Vultr, Azure and AWS from their public APIs on a schedule.
 - [ ] Only Hetzner has one-click deploy. Other providers get the kit and the cloud-init file to paste.
 - [ ] Webhook alerts are sent as `{text, content}`, which Slack and Discord accept. Not tried against a real Slack or Discord yet.
 

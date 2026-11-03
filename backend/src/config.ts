@@ -2,8 +2,8 @@ import path from 'node:path';
 
 const root = path.resolve(import.meta.dirname, '..');
 
-// One place to change the name, because "Airchitect" is only a working name.
-export const BRAND = process.env.BRAND_NAME ?? 'Airchitect';
+// The product name, in one place.
+export const BRAND = process.env.BRAND_NAME ?? 'Runvale';
 
 export const config = {
   host: process.env.HOST ?? '127.0.0.1',

@@ -86,7 +86,7 @@ async function ensureSshKey(token: string, publicKey: string): Promise<number> {
   const { ssh_keys } = await api<{ ssh_keys: { id: number; public_key: string }[] }>(token, '/ssh_keys?per_page=50');
   const existing = ssh_keys.find((k) => k.public_key.trim().split(/\s+/).slice(0, 2).join(' ') === body);
   if (existing) return existing.id;
-  const name = `airchitect-${crypto.randomBytes(3).toString('hex')}`;
+  const name = `runvale-${crypto.randomBytes(3).toString('hex')}`;
   const { ssh_key } = await api<{ ssh_key: { id: number } }>(token, '/ssh_keys', { method: 'POST', body: { name, public_key: publicKey.trim() } });
   return ssh_key.id;
 }
@@ -111,7 +111,7 @@ export async function createServer(token: string, input: CreateServer) {
       image: 'ubuntu-24.04',
       ssh_keys: [keyId],
       user_data: input.userData,
-      labels: { managed_by: 'airchitect' },
+      labels: { managed_by: 'runvale' },
     },
   });
   const ip = server.public_net.ipv4?.ip;

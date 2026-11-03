@@ -97,6 +97,7 @@ code, pre { font-family: var(--mono); }
   letter-spacing: -0.01em;
 }
 .brand svg { width: 26px; height: 26px; fill: none; stroke: var(--accent); stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+.brand svg circle { fill: var(--accent); stroke: none; }
 .top nav { display: flex; }
 .top nav a {
   display: grid;

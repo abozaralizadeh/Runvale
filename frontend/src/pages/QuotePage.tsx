@@ -31,7 +31,7 @@ export function QuotePage() {
       <div className="hero compact">
         <span className="eyebrow">Placement quote</span>
         <h1>Tell us your budget. We'll find where your app should live.</h1>
-        <p>The same server can cost €6 or €110 a month, depending on who you rent it from. We compare them for you, traffic and backups included.</p>
+        <p>The same server can cost €5.50 or €113 a month, depending on who you rent it from. We compare them for you, traffic and backups included.</p>
       </div>
 
       <div className="quote-grid">
@@ -125,7 +125,7 @@ function IndexTable() {
             {rows.map((r) => (
               <tr key={r.provider + r.plan}>
                 <td><a href={r.url} target="_blank" rel="noreferrer">{r.provider}</a></td>
-                <td>{r.plan}</td>
+                <td><a href={r.source} target="_blank" rel="noreferrer" title="Where this price comes from">{r.plan}</a></td>
                 <td className="num">{r.vcpu}</td>
                 <td className="num">{r.ramGb} GB</td>
                 <td className="num">{r.monthlyEur.toFixed(2)}</td>
@@ -136,7 +136,7 @@ function IndexTable() {
           </tbody>
         </table>
       </div>
-      <p className="fine">Prices from <a href={index.source} target="_blank" rel="noreferrer">getdeploying.com</a> and provider pages, {index.asOf}.</p>
+      <p className="fine">Prices come from each provider's own pricing page or API, checked {index.asOf}. Click a plan to see its source. Hetzner is read live.</p>
     </Section>
   );
 }

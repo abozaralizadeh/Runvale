@@ -38,7 +38,7 @@ before(async () => {
   });
   verified = http.createServer((req, res) => {
     const host = (req.headers.host ?? '').split(':')[0]!;
-    if (req.url === '/.well-known/airchitect-verify.txt') return res.end(verifyToken(host));
+    if (req.url === '/.well-known/runvale-verify.txt') return res.end(verifyToken(host));
     if (req.url === '/.env') return res.end('SECRET_KEY=abc\n');
     res.end('<html></html>');
   });

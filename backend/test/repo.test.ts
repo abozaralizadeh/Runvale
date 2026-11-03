@@ -64,19 +64,19 @@ test('the kit is valid YAML and carries no secrets by default', () => {
   const init = parse(initText);
   assert.equal(init.ssh_pwauth, false);
   assert.deepEqual(init.users[0].ssh_authorized_keys, ['ssh-ed25519 AAAAC3Nza me@x']);
-  assert.ok(!init.write_files.some((f: { path: string }) => f.path === '/opt/airchitect/.env'));
+  assert.ok(!init.write_files.some((f: { path: string }) => f.path === '/opt/runvale/.env'));
   assert.ok(Buffer.byteLength(initText) < 32_000);
   assert.ok(kit['deploy/Dockerfile']!.includes('USER node'));
   assert.ok(kit['deploy/.env.example']!.includes('API_KEY='));
   assert.ok(!kit['deploy/.env.example']!.includes('DATABASE_URL'));
-  assert.equal(parse(kit['airchitect.yaml']!).metadata.name, 'shop-app');
+  assert.equal(parse(kit['runvale.yaml']!).metadata.name, 'shop-app');
 });
 
 test('settings only reach the server through a private file', () => {
   const a = analyze(repo({ 'index.html': '' }), 'site');
   const kit = generateKit(a);
   const init = parse(cloudInit(kit, { env: 'TOKEN=abc\n' }));
-  const env = init.write_files.find((f: { path: string }) => f.path === '/opt/airchitect/.env');
+  const env = init.write_files.find((f: { path: string }) => f.path === '/opt/runvale/.env');
   assert.equal(env.permissions, '0600');
   assert.equal(Buffer.from(env.content, 'base64').toString(), 'TOKEN=abc\n');
 });
