@@ -1,9 +1,11 @@
-# Publishes site/ to GitHub Pages.
-# Manual only for now. To turn it on: make the repo public, set Pages to
-# "GitHub Actions" in the repo settings, then add a push trigger for site/**.
+# Publishes site/ to GitHub Pages on every push that changes it, or by hand.
+# Needs Pages set to "GitHub Actions" in the repo settings.
 name: Pages
 
 on:
+  push:
+    branches: [main]
+    paths: ['site/**']
   workflow_dispatch:
 
 permissions:
