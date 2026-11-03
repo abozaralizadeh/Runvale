@@ -1,6 +1,10 @@
 # Airchitect
 
+![Airchitect demo: scan a site, compare clouds, rescue a repo, watch the app](site/demo/tour.gif)
+
 Get a web app you built (often with an AI tool) safely onto a server you can afford.
+
+Project site: https://abozaralizadeh.github.io/Airchitect/ · [Full demo video (MP4)](site/demo/tour.mp4)
 
 Airchitect does four things:
 
@@ -12,8 +16,6 @@ Airchitect does four things:
 It also comes as a CLI and an MCP server, so coding agents can use it directly.
 
 > Status: early beta. "Airchitect" is a working name and will change. See [CHECKLIST.md](CHECKLIST.md) for what works, what's faked and what's missing.
-
-![Security scan](site/screenshots/scan.jpg)
 
 ## Quick install
 
@@ -91,8 +93,10 @@ See [docs/architecture.md](docs/architecture.md).
 
 ## Contributing
 
-Issues and pull requests are welcome. Good first areas are in [CHECKLIST.md](CHECKLIST.md) under "Faked or limited" and "Still missing", for example live price adapters for more providers. Keep changes small, add a test, and run `npm test` before you open a PR. The scanner must stay passive: it only reads what any visitor can see, unless the owner has proven the site is theirs.
+Issues and pull requests are welcome. Read [CONTRIBUTING.md](CONTRIBUTING.md) first, because contributions come with a licensing condition.
 
 ## License
 
-To be decided.
+Source available, free for non-commercial use ([PolyForm Noncommercial 1.0.0](LICENSE)). You can use it, study it, change it and share it for anything that isn't commercial. Commercial use needs written permission: ask by opening a GitHub issue.
+
+Docs, screenshots and the demo video are under [CC BY-NC 4.0](LICENSE-docs.md). The deploy kits the tool generates for you are yours to use however you like, commercially too. Third-party parts keep their own licenses, see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).

@@ -35,7 +35,12 @@
     h1 { font-size: clamp(32px, 6vw, 52px); line-height: 1.1; margin: 0 0 16px; max-width: 18ch; }
     h2 { font-size: 26px; margin: 0 0 12px; }
     .lead { font-size: 19px; color: var(--muted); max-width: 60ch; margin: 0 0 28px; }
-    .btn { display: inline-block; padding: 10px 18px; background: var(--accent); color: var(--accent-ink); text-decoration: none; font-weight: 600; border-radius: 2px; }
+    .btn { display: inline-block; padding: 10px 18px; background: var(--accent); color: var(--accent-ink); text-decoration: none; font-weight: 600; border-radius: 2px; border: 1px solid var(--accent); margin: 0 8px 8px 0; }
+    .btn.ghost { background: transparent; color: var(--accent); }
+    .demo { margin: 48px 0 0; }
+    .demo video { display: block; width: 100%; height: auto; border: 1px solid var(--line); background: var(--panel); }
+    footer a { color: var(--muted); }
+    footer p { margin: 0 0 6px; }
     .steps { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--line); background: var(--panel); margin: 48px 0; }
     .steps div { padding: 18px; border-left: 1px solid var(--line); }
     .steps div:first-child { border-left: 0; }
@@ -62,13 +67,22 @@
   <div class="wrap">
     <header>
       <span class="brand"><img src="favicon.svg" alt="">Airchitect</span>
-      <a href="https://github.com/abozaralizadeh/Airchitect">Source on GitHub</a>
+      <a href="https://github.com/abozaralizadeh/Airchitect">View the code on GitHub</a>
     </header>
 
-    <p class="eyebrow">Free and self-hosted</p>
+    <p class="eyebrow">Self-hosted · free for non-commercial use</p>
     <h1>You built the app. Now get it online safely.</h1>
     <p class="lead">Airchitect checks a web app for leaked keys and weak settings, finds the cloud that fits your budget, writes a hardened deploy kit and keeps an eye on the app once it's live.</p>
     <a class="btn" href="#install">Install it</a>
+    <a class="btn ghost" href="https://github.com/abozaralizadeh/Airchitect">Source on GitHub</a>
+
+    <section class="demo">
+      <h2>See it work</h2>
+      <video controls muted playsinline preload="metadata" poster="demo/tour-poster.jpg">
+        <source src="demo/tour.mp4" type="video/mp4">
+      </video>
+      <p class="note">A 40-second recording of the real app running locally: scan github.com, compare clouds, rescue a public Next.js repo, then watch example.com.</p>
+    </section>
 
     <div class="steps">
       <div><b>01 Scan</b><p>Find leaked keys and missing protections on a live app.</p></div>
@@ -107,7 +121,10 @@ journalctl -u airchitect.service -f</pre>
       <p class="note">This page is static. The app itself needs its backend to scan sites and fetch repos, so there's no live demo here. Run it locally in a couple of minutes instead.</p>
     </section>
 
-    <footer>Early beta. "Airchitect" is a working name. License to be decided.</footer>
+    <footer>
+      <p>Source available, free for non-commercial use (<a href="https://github.com/abozaralizadeh/Airchitect/blob/main/LICENSE">PolyForm Noncommercial 1.0.0</a>). Commercial use needs written permission: <a href="https://github.com/abozaralizadeh/Airchitect/issues">ask in a GitHub issue</a>. Docs and media: CC BY-NC 4.0.</p>
+      <p>Early beta. "Airchitect" is a working name.</p>
+    </footer>
   </div>
 </body>
 </html>

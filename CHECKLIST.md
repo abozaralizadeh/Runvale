@@ -15,6 +15,8 @@ Where the project stands. Good places to help are under "Faked or limited" and "
 - [x] MCP server: a real stdio test lists the three tools and calls each one.
 - [x] SSRF protection on every outbound request, including redirects and DNS.
 - [x] Backend tests pass. Frontend and backend type-check and build.
+- [x] Demo recording of the real UI (`site/demo/`), re-recordable from `demos/tour.json`.
+- [x] Project site in `site/`, ready for GitHub Pages.
 
 ## Faked or limited
 

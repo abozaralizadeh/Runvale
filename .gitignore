@@ -36,3 +36,7 @@ models/
 # tools and OS
 .claude/
 .DS_Store
+
+# demo recorder output and logins
+demos/out/
+demos/auth/
