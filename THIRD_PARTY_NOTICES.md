@@ -12,6 +12,10 @@ Airchitect's own code is under the PolyForm Noncommercial License 1.0.0 (see [LI
 | fflate | MIT |
 | IBM Plex Sans and IBM Plex Mono (via `@fontsource`) | SIL Open Font License 1.1 |
 
+## Fonts on the project site
+
+`site/fonts/` holds latin subsets of Bricolage Grotesque, IBM Plex Sans and IBM Plex Mono, taken from Google Fonts. All three are under the SIL Open Font License 1.1.
+
 ## Dependencies installed by npm
 
 None of these are copied into this repo. npm downloads them, and their license files ship inside `node_modules`. A check of both lockfiles on 3 Nov 2026 found only these licenses:

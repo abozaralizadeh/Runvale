@@ -3,128 +3,290 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Airchitect</title>
-  <meta name="description" content="Scan, place, deploy and watch the web apps you built. Free and self-hosted.">
+  <title>Airchitect: ship your app safely, from €5 a month</title>
+  <meta name="description" content="Airchitect finds the leaks in the app you built, picks the cheapest cloud that fits, writes a hardened server setup and keeps watching it. Free for non-commercial use.">
+  <meta name="theme-color" content="#0A1A33" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#F3EFE4" media="(prefers-color-scheme: light)">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <style>
-    :root {
-      --bg: #f4f2ea; --panel: #fbfaf5; --ink: #16213a; --muted: #5a6474;
-      --line: #d8d4c6; --accent: #1546c0; --accent-ink: #fff; --grid: rgba(21, 70, 192, 0.055);
-      --sans: system-ui, -apple-system, 'Segoe UI', sans-serif;
-      --mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
-      color-scheme: light dark;
-    }
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #0c1729; --panel: #122038; --ink: #e7edf6; --muted: #9aa8bd;
-        --line: #2a3c58; --accent: #84aeff; --accent-ink: #0c1729; --grid: rgba(132, 174, 255, 0.05);
-      }
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0; font: 16px/1.6 var(--sans); color: var(--ink); background-color: var(--bg);
-      background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px);
-      background-size: 24px 24px;
-    }
-    .wrap { max-width: 1040px; margin: 0 auto; padding: 0 16px; }
-    header { display: flex; align-items: center; justify-content: space-between; padding: 20px 0; border-bottom: 1px solid var(--line); }
-    .brand { display: flex; gap: 10px; align-items: center; font-weight: 600; }
-    .brand img { width: 22px; height: 22px; }
-    header a { color: var(--ink); }
-    .eyebrow { font: 12px var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin: 56px 0 8px; }
-    h1 { font-size: clamp(32px, 6vw, 52px); line-height: 1.1; margin: 0 0 16px; max-width: 18ch; }
-    h2 { font-size: 26px; margin: 0 0 12px; }
-    .lead { font-size: 19px; color: var(--muted); max-width: 60ch; margin: 0 0 28px; }
-    .btn { display: inline-block; padding: 10px 18px; background: var(--accent); color: var(--accent-ink); text-decoration: none; font-weight: 600; border-radius: 2px; border: 1px solid var(--accent); margin: 0 8px 8px 0; }
-    .btn.ghost { background: transparent; color: var(--accent); }
-    .demo { margin: 48px 0 0; }
-    .demo video { display: block; width: 100%; height: auto; border: 1px solid var(--line); background: var(--panel); }
-    footer a { color: var(--muted); }
-    footer p { margin: 0 0 6px; }
-    .steps { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--line); background: var(--panel); margin: 48px 0; }
-    .steps div { padding: 18px; border-left: 1px solid var(--line); }
-    .steps div:first-child { border-left: 0; }
-    .steps b { display: block; font-family: var(--mono); font-size: 12px; color: var(--accent); margin-bottom: 4px; }
-    .steps p { margin: 0; font-size: 15px; }
-    section { margin: 64px 0; }
-    .shots { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-    figure { margin: 0; border: 1px solid var(--line); background: var(--panel); }
-    figure img { display: block; width: 100%; height: auto; }
-    figcaption { padding: 10px 14px; font-size: 14px; color: var(--muted); border-top: 1px solid var(--line); }
-    pre { background: var(--panel); border: 1px solid var(--line); padding: 14px 16px; overflow-x: auto; font: 14px/1.5 var(--mono); margin: 8px 0 16px; }
-    code { font-family: var(--mono); font-size: 0.92em; }
-    .note { font-size: 14px; color: var(--muted); }
-    footer { border-top: 1px solid var(--line); padding: 24px 0 48px; font-size: 14px; color: var(--muted); }
-    @media (max-width: 760px) {
-      .steps { grid-template-columns: 1fr 1fr; }
-      .steps div:nth-child(3) { border-left: 0; }
-      .steps div:nth-child(n+3) { border-top: 1px solid var(--line); }
-      .shots { grid-template-columns: 1fr; }
-    }
-  </style>
+  <link rel="canonical" href="https://abozaralizadeh.github.io/Airchitect/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://abozaralizadeh.github.io/Airchitect/">
+  <meta property="og:title" content="Airchitect: ship your app safely, from €5 a month">
+  <meta property="og:description" content="Scan your app for leaks, pick the cloud that fits your budget, get a hardened server kit and keep it watched. Runs on your machine.">
+  <meta property="og:image" content="https://abozaralizadeh.github.io/Airchitect/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Airchitect: ship your app safely, from €5 a month. A security report showing grade A.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Airchitect: ship your app safely, from €5 a month">
+  <meta name="twitter:description" content="Scan your app for leaks, pick the cloud that fits your budget, get a hardened server kit and keep it watched.">
+  <meta name="twitter:image" content="https://abozaralizadeh.github.io/Airchitect/og.png">
+
+  <link rel="preload" href="fonts/bricolage.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/plex-sans.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="style.css">
+  <script>try{var t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 </head>
 <body>
-  <div class="wrap">
-    <header>
-      <span class="brand"><img src="favicon.svg" alt="">Airchitect</span>
-      <a href="https://github.com/abozaralizadeh/Airchitect">View the code on GitHub</a>
-    </header>
+  <a class="skip" href="#main">Skip to content</a>
 
-    <p class="eyebrow">Self-hosted · free for non-commercial use</p>
-    <h1>You built the app. Now get it online safely.</h1>
-    <p class="lead">Airchitect checks a web app for leaked keys and weak settings, finds the cloud that fits your budget, writes a hardened deploy kit and keeps an eye on the app once it's live.</p>
-    <a class="btn" href="#install">Install it</a>
-    <a class="btn ghost" href="https://github.com/abozaralizadeh/Airchitect">Source on GitHub</a>
-
-    <section class="demo">
-      <h2>See it work</h2>
-      <video controls muted playsinline preload="metadata" poster="demo/tour-poster.jpg">
-        <source src="demo/tour.mp4" type="video/mp4">
-      </video>
-      <p class="note">A 40-second recording of the real app running locally: scan github.com, compare clouds, rescue a public Next.js repo, then watch example.com.</p>
-    </section>
-
-    <div class="steps">
-      <div><b>01 Scan</b><p>Find leaked keys and missing protections on a live app.</p></div>
-      <div><b>02 Quote</b><p>Compare clouds by price, reliability and tooling.</p></div>
-      <div><b>03 Rescue</b><p>Turn a repo into a hardened, ready-to-deploy server.</p></div>
-      <div><b>04 Watch</b><p>Uptime, certificates and a daily security check.</p></div>
+  <header class="nav">
+    <div class="wrap nav-in">
+      <a class="brand" href="#top" aria-label="Airchitect home">
+        <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M4 27 16 5l12 22" /><path d="M9.5 18h13" /><path d="M16 5v22" class="brand-axis" /></svg>
+        <span>Airchitect</span>
+      </a>
+      <nav aria-label="Sections">
+        <a href="#how">How it works</a>
+        <a href="#features">Features</a>
+        <a href="#install">Install</a>
+        <a href="#faq">Limits</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="theme-toggle" type="button" aria-label="Switch light or dark theme">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.5" /><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8" /></svg>
+        </button>
+        <a class="btn btn-small btn-ghost" href="https://github.com/abozaralizadeh/Airchitect">GitHub</a>
+      </div>
     </div>
+  </header>
 
-    <section>
-      <h2>What it looks like</h2>
-      <div class="shots">
-        <figure><img src="screenshots/scan.jpg" alt="Security report for github.com with grade A" loading="lazy"><figcaption>Scan: a plain-language security report.</figcaption></figure>
-        <figure><img src="screenshots/quote.jpg" alt="Three hosting options: OVHcloud, Hetzner and UpCloud" loading="lazy"><figcaption>Quote: three options with the full monthly cost.</figcaption></figure>
-        <figure><img src="screenshots/rescue.jpg" alt="Rescue report for a Next.js repo with its deploy kit files" loading="lazy"><figcaption>Rescue: a deploy kit generated from a GitHub repo.</figcaption></figure>
-        <figure><img src="screenshots/watch.jpg" alt="Watch card showing uptime, response time, certificate and security grade" loading="lazy"><figcaption>Watch: uptime, certificate and security at a glance.</figcaption></figure>
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+        <p class="eyebrow"><span class="dot" aria-hidden="true"></span>Free for non-commercial use<span class="eyebrow-more"> · runs on your machine</span></p>
+        <h1>Ship your app safely, <em>from €5 a month.</em></h1>
+        <p class="lead">Built it with Lovable, Bolt or a coding agent? Airchitect finds the leaks, picks the cheapest cloud that fits, writes a hardened server setup and keeps an eye on it after launch.</p>
+        <div class="cta">
+          <a class="btn" href="https://github.com/abozaralizadeh/Airchitect">View on GitHub <span aria-hidden="true">→</span></a>
+          <a class="btn btn-ghost" href="#install">Install</a>
+        </div>
+        <p class="proof">Server kits tested in real Docker for Next.js, Vite, Express&nbsp;+&nbsp;Postgres, FastAPI and Flask.</p>
+        </div>
+
+        <figure class="stage">
+          <div class="dim dim-top" aria-hidden="true">
+            <svg class="dim-line" preserveAspectRatio="none" viewBox="0 0 100 10"><path d="M0 5H100" pathLength="1" /><path d="M0 0v10M100 0v10" class="dim-ends" vector-effect="non-scaling-stroke" /></svg>
+            <span class="dim-label"><span data-width>1120</span> px</span>
+          </div>
+          <div class="window">
+            <div class="window-bar" aria-hidden="true">
+              <span class="lights"><i></i><i></i><i></i></span>
+              <span class="url">localhost:8790</span>
+            </div>
+            <video class="demo" muted loop playsinline preload="none" poster="img/poster.webp" width="1440" height="810" data-src="demo/tour-web.mp4" aria-label="Demo: scanning github.com, comparing clouds, rescuing a Next.js repo and watching example.com"></video>
+          </div>
+          <ol class="legend" aria-label="What the demo shows">
+            <li data-from="0"><b>01</b> Scan</li>
+            <li data-from="9.5"><b>02</b> Quote</li>
+            <li data-from="16"><b>03</b> Rescue</li>
+            <li data-from="25"><b>04</b> Watch</li>
+          </ol>
+          <figcaption class="note">The real app, recorded on a laptop. 33 seconds, nothing staged.</figcaption>
+        </figure>
       </div>
     </section>
 
-    <section id="install">
-      <h2>Quick install</h2>
-      <p>You need Node.js 24 or newer.</p>
-      <pre>git clone https://github.com/abozaralizadeh/Airchitect airchitect
-cd airchitect/backend &amp;&amp; npm install &amp;&amp; npm run dev</pre>
-      <p>In a second terminal:</p>
-      <pre>cd airchitect/frontend &amp;&amp; npm install &amp;&amp; npm run dev</pre>
-      <p>Then open <code>http://localhost:5173</code>.</p>
+    <section class="section" id="how">
+      <div class="wrap">
+        <header class="section-head reveal">
+          <p class="kicker">How it works</p>
+          <h2>Three steps from “it works on my laptop” to live.</h2>
+        </header>
 
-      <h2>On a server</h2>
-      <p>On a fresh Ubuntu VM, one script installs everything, sets up HTTPS and starts the service. Rerun it to update.</p>
-      <pre>sudo DOMAIN=app.example.com ./setup_service.sh
-journalctl -u airchitect.service -f</pre>
+        <div class="steps">
+          <article class="step reveal">
+            <div class="step-text">
+              <span class="step-no">01</span>
+              <h3>Paste your app’s address</h3>
+              <p>You get a grade from A to F and a plain list of what’s wrong. It reads what any visitor can see: leaked API keys in your JavaScript, missing HTTPS headers, open CORS, source maps. Every fix comes with a prompt you can paste into your coding tool.</p>
+            </div>
+            <div class="shot">
+              <img src="img/scan.webp" width="1600" height="1125" alt="Security report for github.com with grade A and no findings" loading="lazy" decoding="async">
+            </div>
+          </article>
 
-      <h2>From a coding agent</h2>
-      <p>Build the backend, then add the MCP server to your agent. It gets three tools: <code>scan_url</code>, <code>quote_cloud</code> and <code>rescue_project</code>.</p>
-      <pre>{ "mcpServers": { "airchitect": { "command": "node", "args": ["/path/to/airchitect/backend/dist/mcp.js"] } } }</pre>
-      <p class="note">This page is static. The app itself needs its backend to scan sites and fetch repos, so there's no live demo here. Run it locally in a couple of minutes instead.</p>
+          <article class="step step-flip reveal">
+            <div class="step-text">
+              <span class="step-no">02</span>
+              <h3>Set a budget, get three options</h3>
+              <p>The same small server costs €6 at one company and €110 at another. Airchitect compares ten providers on price, reliability and tooling, adds traffic and backups, and shows a Budget, a Balanced and a Premium pick. One switch keeps you on European companies only.</p>
+            </div>
+            <div class="shot">
+              <img src="img/quote.webp" width="1600" height="1125" alt="Three hosting options: OVHcloud at €4.89, Hetzner at €5.62 and UpCloud at €21.49 a month" loading="lazy" decoding="async">
+            </div>
+          </article>
+
+          <article class="step reveal">
+            <div class="step-text">
+              <span class="step-no">03</span>
+              <h3>Point it at your repo, get a server</h3>
+              <p>It reads your code, spots committed secrets and risky settings, and writes everything a server needs: Dockerfile, Docker Compose, Caddy with HTTPS, a locked-down Ubuntu setup and nightly backups. Plain files you own. On Hetzner it can also create the server for you.</p>
+            </div>
+            <div class="shot">
+              <img src="img/rescue.webp" width="1600" height="1125" alt="Rescue report for a Next.js repo: no problems found, and the list of generated deploy files" loading="lazy" decoding="async">
+            </div>
+          </article>
+        </div>
+      </div>
     </section>
 
-    <footer>
-      <p>Source available, free for non-commercial use (<a href="https://github.com/abozaralizadeh/Airchitect/blob/main/LICENSE">PolyForm Noncommercial 1.0.0</a>). Commercial use needs written permission: <a href="https://github.com/abozaralizadeh/Airchitect/issues">ask in a GitHub issue</a>. Docs and media: CC BY-NC 4.0.</p>
-      <p>Early beta. "Airchitect" is a working name.</p>
-    </footer>
-  </div>
+    <section class="section section-alt" id="features">
+      <div class="wrap">
+        <header class="section-head reveal">
+          <p class="kicker">What you get</p>
+          <h2>The checks a senior engineer would run, without the senior engineer.</h2>
+        </header>
+
+        <div class="features">
+          <article class="card reveal">
+            <svg class="icon" viewBox="0 0 48 48" aria-hidden="true"><rect x="7" y="20" width="26" height="20" rx="2" /><path d="M13 20v-5a7 7 0 0 1 14 0" /><circle cx="20" cy="29" r="2.5" /><path d="M20 31.5V35" /><path d="M36 10l5-5M38 16h6M32 6V0" class="accent-stroke" /></svg>
+            <h3>Finds leaked keys</h3>
+            <p>Reads your site’s own JavaScript and flags Stripe, OpenAI, AWS, GitHub and Supabase service keys. Keys are masked in the report.</p>
+          </article>
+          <article class="card reveal">
+            <svg class="icon" viewBox="0 0 48 48" aria-hidden="true"><ellipse cx="22" cy="10" rx="14" ry="5" /><path d="M8 10v24c0 2.8 6.3 5 14 5" /><path d="M36 10v12" /><path d="M8 22c0 2.8 6.3 5 14 5" /><path d="M30 31l4 4 8-9" class="accent-stroke" /></svg>
+            <h3>Tests that your database is locked</h3>
+            <p>Prove the site is yours and it checks whether your Supabase tables can be read without logging in. It reports table names, never rows.</p>
+          </article>
+          <article class="card reveal">
+            <svg class="icon" viewBox="0 0 48 48" aria-hidden="true"><rect x="6" y="8" width="36" height="12" rx="2" /><rect x="6" y="26" width="36" height="12" rx="2" /><path d="M12 14h6M12 32h6" /><path d="M33 14h3M33 32h3" class="accent-stroke" /><path d="M24 38v6M18 44h12" /></svg>
+            <h3>A server you own</h3>
+            <p>Firewall, fail2ban, key-only SSH, automatic security updates, non-root containers and HTTPS by default. Nothing in the kit depends on us.</p>
+          </article>
+          <article class="card reveal">
+            <svg class="icon" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="17" /><path d="M7 24h34M24 7c-5 5-7 11-7 17s2 12 7 17M24 7c5 5 7 11 7 17s-2 12-7 17" /><circle cx="27" cy="17" r="3.5" class="accent-stroke" /></svg>
+            <h3>EU-only with one switch</h3>
+            <p>Keep your data with European companies: Hetzner, OVHcloud, Scaleway, UpCloud and Contabo. The quote shows where each server sits.</p>
+          </article>
+          <article class="card reveal">
+            <svg class="icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M4 26h8l4-10 6 20 5-14 3 4h14" /><circle cx="40" cy="26" r="3" class="accent-stroke" /></svg>
+            <h3>Watches it after launch</h3>
+            <p>Uptime every 5 minutes, certificate expiry and a fresh security check every day. Alerts go to Slack or Discord. No account needed.</p>
+          </article>
+          <article class="card reveal">
+            <svg class="icon" viewBox="0 0 48 48" aria-hidden="true"><rect x="5" y="9" width="38" height="30" rx="3" /><path d="M5 16h38" /><path d="M12 24l5 4-5 4" class="accent-stroke" /><path d="M21 32h10" /></svg>
+            <h3>Works inside your coding agent</h3>
+            <p>An MCP server gives Claude Code, Cursor and friends three tools: scan, quote and rescue. There’s a plain CLI too.</p>
+          </article>
+        </div>
+
+        <div class="wide-shot reveal">
+          <div class="wide-text">
+            <p class="kicker">After launch</p>
+            <h3>Know it broke before your customers do.</h3>
+            <p>Your watch list lives on your own server. Open it on another device with a private key, no sign-up.</p>
+          </div>
+          <div class="shot">
+            <img src="img/watch.webp" width="1600" height="1125" alt="Watch card for example.com: up, 100% uptime, certificate valid for 52 days, security grade C" loading="lazy" decoding="async">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="install">
+      <div class="wrap narrow">
+        <header class="section-head reveal">
+          <p class="kicker">Install</p>
+          <h2>Running in two minutes.</h2>
+          <p class="section-sub">You need Node.js 24 or newer. Everything runs on your machine.</p>
+        </header>
+
+        <div class="code-group reveal">
+          <h3>On your laptop</h3>
+          <div class="code"><pre><code>git clone https://github.com/abozaralizadeh/Airchitect airchitect
+cd airchitect/backend && npm install && npm run dev</code></pre><button class="copy" type="button">Copy</button></div>
+          <p>In a second terminal, then open <code>localhost:5173</code>:</p>
+          <div class="code"><pre><code>cd airchitect/frontend && npm install && npm run dev</code></pre><button class="copy" type="button">Copy</button></div>
+        </div>
+
+        <div class="code-group reveal">
+          <h3>On a server</h3>
+          <p>A fresh Ubuntu VM. It installs Node and Caddy, sets up HTTPS and a systemd service. Run it again to update.</p>
+          <div class="code"><pre><code>sudo DOMAIN=app.example.com ./setup_service.sh</code></pre><button class="copy" type="button">Copy</button></div>
+        </div>
+
+        <div class="code-group reveal">
+          <h3>In your coding agent</h3>
+          <p>Run <code>npm run build</code> in <code>backend/</code>, then add this to your MCP config:</p>
+          <div class="code"><pre><code>{
+  "mcpServers": {
+    "airchitect": {
+      "command": "node",
+      "args": ["/path/to/airchitect/backend/dist/mcp.js"]
+    }
+  }
+}</code></pre><button class="copy" type="button">Copy</button></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="faq">
+      <div class="wrap narrow">
+        <header class="section-head reveal">
+          <p class="kicker">Limits, honestly</p>
+          <h2>What it can’t do yet.</h2>
+        </header>
+        <div class="faq reveal">
+          <details>
+            <summary>Is it really free?</summary>
+            <p>Yes, for anything non-commercial. The code is source available under the PolyForm Noncommercial 1.0.0 license. If you want to use it in a business, ask in a GitHub issue.</p>
+          </details>
+          <details>
+            <summary>Will the scan hurt my site?</summary>
+            <p>No. It only reads what any visitor’s browser would load, with rate limits. The deeper checks, like exposed <code>.env</code> files and open database tables, only run after you prove the site is yours.</p>
+          </details>
+          <details>
+            <summary>Does it deploy for me?</summary>
+            <p>On Hetzner, yes: paste a token and it creates the server. The token is used once and never stored. For other clouds you get the kit and run one script. One-click for more providers is on the list.</p>
+          </details>
+          <details>
+            <summary>Are the prices live?</summary>
+            <p>Hetzner prices and stock come live from Hetzner’s API. The other providers come from a dated catalog, so check the price on the provider’s site before you buy.</p>
+          </details>
+          <details>
+            <summary>Does it use AI to write my code?</summary>
+            <p>No. The checks and the server templates are plain, predictable code. It’s made for apps that AI tools already wrote.</p>
+          </details>
+          <details>
+            <summary>Is it ready for production?</summary>
+            <p>It’s an early beta. The generated kits were built and run in real Docker for Next.js, Vite, Express with Postgres, FastAPI and Flask. A full run on a real cloud account hasn’t been tested yet. The name is a working name and will change.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">
+      <div class="titleblock">
+        <div class="tb-cell tb-title">
+          <span class="tb-label">Project</span>
+          <strong>Airchitect</strong>
+          <span class="tb-small">Working name</span>
+        </div>
+        <div class="tb-cell">
+          <span class="tb-label">Drawn by</span>
+          <span>Made by <a href="https://abozaralizadeh.github.io/">Abozar Alizadeh</a></span>
+        </div>
+        <div class="tb-cell">
+          <span class="tb-label">Source</span>
+          <a href="https://github.com/abozaralizadeh/Airchitect">github.com/abozaralizadeh/Airchitect</a>
+        </div>
+        <div class="tb-cell">
+          <span class="tb-label">Sheet</span>
+          <span>01 of 01 · Rev 0.1 · Nov 2026</span>
+        </div>
+        <div class="tb-cell tb-wide">
+          <span class="tb-label">License</span>
+          <span>Source available, free for non-commercial use (<a href="https://github.com/abozaralizadeh/Airchitect/blob/main/LICENSE">PolyForm Noncommercial 1.0.0</a>). Commercial use needs written permission: <a href="https://github.com/abozaralizadeh/Airchitect/issues">ask in a GitHub issue</a>. Docs, screenshots and video: CC BY-NC 4.0.</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="main.js" defer></script>
 </body>
 </html>
