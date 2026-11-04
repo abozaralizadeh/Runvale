@@ -10,6 +10,7 @@ import { cloudInit, generateKit } from './kit.js';
 import { logger } from './log.js';
 import { BlockedTargetError } from './net.js';
 import { cloudIndex, quote } from './placement.js';
+import { DailyQuota, QuotaError } from './quota.js';
 import { RepoError } from './repo.js';
 import { rescue } from './rescue.js';
 import { scanUrl } from './scanner.js';
@@ -60,6 +61,10 @@ const WatchBody = z.object({
   notifyUrl: z.string().max(500).optional(),
 });
 
+const scans = new DailyQuota('scans', config.scansPerIpDaily, config.scansDaily);
+const rescues = new DailyQuota('repo checks', config.rescuesPerIpDaily, config.rescuesDaily);
+const watchAdds = new DailyQuota('new watches', config.watchAddsPerIpDaily, config.maxWatches);
+
 let jobs = 0;
 
 async function limited<T>(job: () => Promise<T>): Promise<T> {
@@ -80,8 +85,16 @@ function workspaceOf(req: FastifyRequest): string {
   return key;
 }
 
+// Under a path like /runvale, accept both /runvale/api/... and /api/..., so it works whether or not the proxy strips the prefix.
+function stripBasePath(url = '/') {
+  const base = config.basePath;
+  if (!base || (url !== base && !url.startsWith(`${base}/`) && !url.startsWith(`${base}?`))) return url;
+  const rest = url.slice(base.length);
+  return rest.startsWith('/') ? rest : `/${rest}`;
+}
+
 export async function buildApp() {
-  const app = Fastify({ loggerInstance: logger, trustProxy: config.trustProxy, bodyLimit: 256_000 });
+  const app = Fastify({ loggerInstance: logger, trustProxy: config.trustProxy, bodyLimit: 256_000, rewriteUrl: (req) => stripBasePath(req.url) });
 
   await app.register(helmet, {
     contentSecurityPolicy: {
@@ -99,10 +112,18 @@ export async function buildApp() {
         frameAncestors: ["'none'"],
       },
     },
-    strictTransportSecurity: { maxAge: 31_536_000, includeSubDomains: true },
+    // On a shared host under a path, HSTS is the main web server's call, not this app's.
+    strictTransportSecurity: config.basePath ? false : { maxAge: 31_536_000, includeSubDomains: true },
     referrerPolicy: { policy: 'strict-origin-when-cross-origin' },
   });
   await app.register(rateLimit, { max: 180, timeWindow: '1 minute' });
+
+  // The page loads its files with relative paths, so /runvale must become /runvale/ first.
+  if (config.basePath) {
+    app.addHook('onRequest', async (req, reply) => {
+      if (req.originalUrl === config.basePath) return reply.redirect(`${config.basePath}/`, 301);
+    });
+  }
 
   app.setErrorHandler((err: Error & { statusCode?: number }, req, reply) => {
     if (err instanceof ZodError) return reply.status(400).send({ error: err.issues[0]?.message ?? 'Invalid input' });
@@ -110,6 +131,7 @@ export async function buildApp() {
       return reply.status(400).send({ error: err.message });
     }
     if (err instanceof ProviderError) return reply.status(err.status).send({ error: err.message });
+    if (err instanceof QuotaError) return reply.status(429).send({ error: err.message });
     if (err instanceof BusyError) return reply.status(503).send({ error: "We're busy right now. Try again in a moment." });
     if (err.statusCode === 429) return reply.status(429).send({ error: 'Too many requests. Wait a minute and try again.' });
     if (err.statusCode && err.statusCode < 500) return reply.status(err.statusCode).send({ error: err.message });
@@ -124,11 +146,13 @@ export async function buildApp() {
 
   app.post('/api/scan', { config: { rateLimit: { max: 10, timeWindow: '1 minute' } } }, async (req) => {
     const { url } = z.object({ url: z.string().min(1).max(500) }).parse(req.body);
+    scans.take(req.ip);
     return limited(() => scanUrl(url));
   });
 
   app.post('/api/rescue', { config: { rateLimit: { max: 6, timeWindow: '1 minute' } } }, async (req) => {
     const { repoUrl, ...rest } = RescueBody.parse(req.body);
+    rescues.take(req.ip);
     return limited(async () => {
       const { analysis, quote: placement, deployable, kit, repoUrl: resolved } = await rescue({ source: repoUrl, ...rest });
       return { analysis, quote: placement, deployable, kit, repoUrl: resolved };
@@ -142,6 +166,7 @@ export async function buildApp() {
 
   app.post('/api/deploy/hetzner', { config: { rateLimit: { max: 3, timeWindow: '1 minute' } } }, async (req) => {
     const body = DeployBody.parse(req.body);
+    rescues.take(req.ip);
     return limited(async () => {
       const result = await rescue({ source: body.repoUrl, domain: body.domain, sshPublicKey: body.sshPublicKey });
       if (!result.deployable) throw new RepoError("We don't know how to run this repo yet, so nothing was created.");
@@ -163,7 +188,9 @@ export async function buildApp() {
 
   app.post('/api/watches', { config: { rateLimit: { max: 10, timeWindow: '1 minute' } } }, async (req) => {
     const body = WatchBody.parse(req.body);
-    return limited(() => addWatch(workspaceOf(req), body));
+    const workspace = workspaceOf(req);
+    watchAdds.take(req.ip);
+    return limited(() => addWatch(workspace, body));
   });
 
   app.delete('/api/watches/:id', async (req, reply) => {

@@ -256,6 +256,8 @@ export async function probeSupabase(base: string, key: string, get: SupabaseFetc
 export async function scanUrl(input: string, opts: { allowPrivate?: boolean } = {}): Promise<ScanReport> {
   const allowPrivate = opts.allowPrivate ?? config.allowPrivateTargets;
   const target = parseTarget(input, allowPrivate);
+  // Past this point the scan stops fetching more scripts and reports what it has.
+  const deadline = Date.now() + config.scanDeadlineMs;
   const findings: Finding[] = [];
   const passed: string[] = [];
   const add = (f: Finding) => findings.push(f);
@@ -300,7 +302,7 @@ export async function scanUrl(input: string, opts: { allowPrivate?: boolean } = 
   let sourceMaps = 0;
 
   const results: string[] = [html];
-  while (queue.length && fetched < MAX_SCRIPTS && bytes < MAX_TOTAL_BYTES) {
+  while (queue.length && fetched < MAX_SCRIPTS && bytes < MAX_TOTAL_BYTES && Date.now() < deadline) {
     const batch = queue.splice(0, 6);
     const responses = await Promise.all(batch.map((src) => safeFetch(src, { maxBytes: MAX_SCRIPT_BYTES, allowPrivate, redirects: 2 }).catch(() => null)));
     responses.forEach((res, index) => {

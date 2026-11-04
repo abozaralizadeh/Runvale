@@ -66,6 +66,8 @@ export async function addWatch(workspace: string, input: { url: string; label?: 
   const hash = hashWorkspace(workspace);
   const { count } = db.prepare('SELECT COUNT(*) AS count FROM watches WHERE workspace = ?').get(hash) as { count: number };
   if (count >= MAX_WATCHES_PER_WORKSPACE) throw new WatchError(`You can watch up to ${MAX_WATCHES_PER_WORKSPACE} apps for now.`);
+  const { total } = db.prepare('SELECT COUNT(*) AS total FROM watches').get() as { total: number };
+  if (total >= config.maxWatches) throw new WatchError("This server is watching as many apps as it can right now. Try again later.");
   const url = parseTarget(input.url);
   if (input.notifyUrl) parseTarget(input.notifyUrl);
   const id = crypto.randomUUID();

@@ -9,11 +9,40 @@ export class BlockedTargetError extends Error {}
 
 export const USER_AGENT = 'RunvaleScanner/0.1 (passive security check)';
 
+function parseIp(ip: string) {
+  const parsed = ipaddr.parse(ip);
+  return parsed instanceof ipaddr.IPv6 && parsed.isIPv4MappedAddress() ? parsed.toIPv4Address() : parsed;
+}
+
 export function isPublicAddress(ip: string): boolean {
   if (!ipaddr.isValid(ip)) return false;
-  let parsed = ipaddr.parse(ip);
-  if (parsed instanceof ipaddr.IPv6 && parsed.isIPv4MappedAddress()) parsed = parsed.toIPv4Address();
-  return parsed.range() === 'unicast';
+  return parseIp(ip).range() === 'unicast';
+}
+
+// The server's own addresses and names, from SCAN_BLOCKLIST and SELF_ADDRESSES. A name also blocks its subdomains.
+export function blocklist(entries: string[]) {
+  const ips = new Set<string>();
+  const names: string[] = [];
+  for (const entry of entries) {
+    const value = entry.trim().toLowerCase().replace(/^\[|\]$/g, '').replace(/\.$/, '');
+    if (!value) continue;
+    if (ipaddr.isValid(value)) ips.add(parseIp(value).toNormalizedString());
+    else names.push(value);
+  }
+  return {
+    address: (ip: string) => ipaddr.isValid(ip) && ips.has(parseIp(ip).toNormalizedString()),
+    name: (host: string) => {
+      const h = host.toLowerCase().replace(/\.$/, '');
+      return names.some((n) => h === n || h.endsWith(`.${n}`));
+    },
+  };
+}
+
+const blocked = blocklist(config.blockedTargets);
+
+// Public, and not this server. Private addresses are allowed only for tests and local runs.
+function reachable(ip: string, allowPrivate: boolean) {
+  return !blocked.address(ip) && (allowPrivate || isPublicAddress(ip));
 }
 
 type LookupCallback = (err: Error | null, address?: string | dns.LookupAddress[], family?: number) => void;
@@ -24,8 +53,9 @@ function guardedLookup(allowPrivate: boolean) {
   return (hostname: string, options: dns.LookupOptions, callback: LookupCallback) => {
     dns.lookup(hostname, { ...options, all: true }, (err, addresses) => {
       if (err) return callback(err);
-      const blocked = !allowPrivate && addresses.find((a) => !isPublicAddress(a.address));
-      if (blocked) return callback(new BlockedTargetError(`${hostname} points to a private address`));
+      if (addresses.some((a) => !reachable(a.address, allowPrivate))) {
+        return callback(new BlockedTargetError(`${hostname} points to a private address`));
+      }
       if (options.all) return callback(null, addresses);
       const first = addresses[0]!;
       callback(null, first.address, first.family);
@@ -51,11 +81,12 @@ export function parseTarget(input: string, allowPrivate = config.allowPrivateTar
     throw new BlockedTargetError('Only http and https addresses can be checked');
   }
   if (url.username || url.password) throw new BlockedTargetError('Addresses with a password in them are not allowed');
+  const host = url.hostname.replace(/^\[|\]$/g, '');
+  if (blocked.name(host) || blocked.address(host)) throw new BlockedTargetError("This server can't check itself");
   if (!allowPrivate) {
     if (url.port && url.port !== '80' && url.port !== '443') {
       throw new BlockedTargetError('Only the standard web ports (80 and 443) can be checked');
     }
-    const host = url.hostname.replace(/^\[|\]$/g, '');
     // Connections to a literal IP skip DNS, so the lookup guard never sees them.
     if (net.isIP(host) && !isPublicAddress(host)) throw new BlockedTargetError('Private addresses are not allowed');
   }

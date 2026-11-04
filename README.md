@@ -51,6 +51,26 @@ It installs Node and Caddy, builds the app and starts the `runvale` service. To 
 journalctl -u runvale.service -f
 ```
 
+### Run it next to other apps
+
+If the server already runs nginx for other sites, use the shared mode. It installs nothing, leaves the firewall and certificates alone, and serves the app under a path:
+
+```bash
+sudo SERVICE_NAME=my-runvale PORT=8607 BASE_PATH=/runvale/ NGINX_SNIPPET=/etc/nginx/snippets.d/runvale.conf ./setup_service.sh
+```
+
+It needs Node 24+, npm, nginx, rsync and curl already installed, and your nginx server block must include the snippet folder. The script writes only that snippet and a rate limit zone in `/etc/nginx/conf.d/`, runs `nginx -t`, and puts both back if the check fails. Settings live in `/etc/<service>.env`, and your own lines survive reruns.
+
+Settings you can add to that file:
+
+| Setting | Default | What it does |
+|---|---|---|
+| `SCAN_BLOCKLIST` | empty | Host names the scanner must never reach, comma separated. The server's own public IP is added for you as `SELF_ADDRESSES` |
+| `SCANS_PER_IP_DAILY`, `SCANS_DAILY` | 50, 1000 | Scans per visitor and per server each day |
+| `RESCUES_PER_IP_DAILY`, `RESCUES_DAILY` | 20, 300 | Repo checks per visitor and per server each day |
+| `WATCH_ADDS_PER_IP_DAILY`, `MAX_WATCHES` | 20, 500 | New watches per visitor each day, and watches in total |
+| `SCAN_DEADLINE_MS` | 40000 | How long one scan may keep fetching files |
+
 ### Use it from the command line
 
 ```bash

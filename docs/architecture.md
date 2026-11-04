@@ -35,14 +35,15 @@ Without a domain, `deploy.sh` uses `<ip>.sslip.io` so HTTPS still works.
 
 ## Safety rules in the code
 
-- **SSRF guard** (`net.ts`). Every outbound request goes through `safeFetch`. It refuses credentials in URLs, odd ports and private, loopback or link-local addresses. It checks the DNS answer at connect time, and it follows redirects by hand, checking each hop. The public API never sets `allowPrivate`. Only the CLI and MCP server do, because they run on the user's own machine.
+- **SSRF guard** (`net.ts`). Every outbound request goes through `safeFetch`. It refuses credentials in URLs, odd ports and private, loopback or link-local addresses. It checks the DNS answer at connect time, and it follows redirects by hand, checking each hop. It also refuses the server's own names and IPs (`SCAN_BLOCKLIST` and `SELF_ADDRESSES`), even when private targets are allowed. The public API never sets `allowPrivate`. Only the CLI and MCP server do, because they run on the user's own machine.
 - **Tokens pass through.** The Hetzner token is used for one request and never stored or logged. The log redacts `authorization` and `x-workspace` headers.
-- **Limits.** Rate limits per route, at most 4 heavy jobs at once, size limits on downloads and zip contents.
+- **Limits.** Rate limits per route, at most 4 heavy jobs at once, size limits on downloads and zip contents. Daily caps per IP and per server for scans, repo checks and new watches (`quota.ts`), a cap on watches across all users, and a 40-second budget per scan.
 
 ## Runtime
 
 - Node 24, Fastify, `node:sqlite` (WAL mode), pino logs to stdout and to rotating files (3 × 5 MB).
-- `setup_service.sh` installs Node and Caddy on Ubuntu, builds both apps, writes a hardened systemd unit and puts Caddy in front. Safe to rerun.
+- `setup_service.sh` installs Node and Caddy on Ubuntu, builds both apps, writes a hardened systemd unit and puts Caddy in front. Safe to rerun. With `NGINX_SNIPPET` set it installs nothing and adds one nginx location under `BASE_PATH` instead.
+- The frontend build uses relative URLs and the API accepts paths with or without `BASE_PATH`, so one build works at `/` and under a path like `/runvale/`.
 
 ## Where it's heading
 

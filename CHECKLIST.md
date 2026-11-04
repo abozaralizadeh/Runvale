@@ -13,7 +13,10 @@ Where the project stands. Good places to help are under "Faked or limited" and "
 - [x] Watch: uptime every 5 minutes, certificate days, daily rescan, webhook alerts, list key to open the same list on another device.
 - [x] CLI (`scan`, `quote`, `rescue`).
 - [x] MCP server: a real stdio test lists the three tools and calls each one.
-- [x] SSRF protection on every outbound request, including redirects and DNS.
+- [x] SSRF protection on every outbound request, including redirects and DNS. The server's own names and IPs are blocked too.
+- [x] Fair-use caps: daily scans, repo checks and new watches per IP and per server, a total watch cap and a time budget per scan.
+- [x] Runs under a path like `/runvale/` behind nginx. Tested through nginx 1.24 in Docker: page, fonts, Scan, Quote and Watch all load from under the path.
+- [x] `setup_service.sh` shared mode for a server that already runs nginx: no packages, no firewall, only one nginx snippet plus a rate limit zone, rolled back if `nginx -t` fails.
 - [x] Backend tests pass. Frontend and backend type-check and build.
 - [x] Demo recording of the real UI (`site/demo/`), re-recordable from `demos/tour.json`.
 - [x] Project site in `site/`, ready for GitHub Pages.
@@ -27,7 +30,7 @@ Where the project stands. Good places to help are under "Faked or limited" and "
 
 ## Still missing
 
-- [ ] An end-to-end run of `setup_service.sh` on a fresh Ubuntu VM.
+- [ ] An end-to-end run of `setup_service.sh` on a fresh Ubuntu VM, in both modes.
 - [ ] An end-to-end deploy on a real Hetzner account.
 - [ ] Live price adapters for OVHcloud, Scaleway and the others.
 - [ ] A static demo of the Quote page that runs without the backend.

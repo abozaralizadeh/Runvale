@@ -129,7 +129,8 @@ export interface Watch {
 async function call<T>(path: string, init?: RequestInit): Promise<T> {
   let res: Response;
   try {
-    res = await fetch(`/api${path}`, init);
+    // Relative, so it follows the page when the app is served under a path.
+    res = await fetch(`api${path}`, init);
   } catch {
     throw new Error("We can't reach the server. Check your connection and try again.");
   }
